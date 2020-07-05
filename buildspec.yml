@@ -9,21 +9,17 @@ env:
 
 phases:
   install:
-    run-as: root
-    runtime-versions:
-      nodejs: 10
     commands:
       - echo Entered the install phase ...
       # Using Ubuntu
       - curl -sL https://deb.nodesource.com/setup_10.x | bash -
-      - sudo apt install -y nodejs
+      - apt install -y nodejs
       # install 
       - echo Installing yarn ...
       - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
       - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-      - sudo apt install yarn
+      - apt install --no-install-recommends yarn
   pre_build:
-    run-as: root
     commands:
       - echo Entered the pre_build phase ...
       - echo Installing dependencies ...
@@ -36,7 +32,6 @@ phases:
       - echo Building ...
       - yarn build 
   post_build:
-    run-as: root
     commands:
       - echo Entered the post_build phase ...
       - echo Build completed on `date`
