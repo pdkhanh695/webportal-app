@@ -14,19 +14,29 @@ phases:
       nodejs: 10
     commands:
       - echo Entered the install phase ...
-      - yum update -y
-      - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-      - npm install
+      # Using Ubuntu
+      - curl -sL https://deb.nodesource.com/setup_10.x | bash -
+      - sudo apt install -y nodejs
+      # install 
+      - echo Installing yarn ...
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+      - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+      - sudo apt install --no-install-recommends yarn
   pre_build:
     run-as: root
     commands:
       - echo Entered the pre_build phase ...
+      - echo Installing dependencies ...
+      - yarn
   build:
     run-as: root
     commands:
       - echo Entered the build phase ...
       - echo Build started on `date`
-      - npm run build
+      - echo Testing ...
+      - yarn test
+      - echo Building ...
+      - yarn build 
   post_build:
     run-as: root
     commands:
@@ -54,4 +64,5 @@ phases:
 artifacts:
   files:
     - "**/*"
+  discard-paths: no
   base-directory: build
