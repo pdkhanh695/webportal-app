@@ -33,7 +33,7 @@ phases:
       - echo Entered the post_build phase ...
       - echo Build completed on `date`
       # copy the contents of /build to S3
-      - aws s3 cp --recursive ./build s3://cloudphan/  #--acl public-read
+      #- aws s3 cp --recursive ./build s3://cloudphan/  #--acl public-read
       # set the cache-control headers for service-worker.js to prevent
       # browser caching
       # - >
