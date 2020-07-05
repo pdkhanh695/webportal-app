@@ -15,8 +15,8 @@ phases:
     commands:
       - echo Entered the install phase ...
       # Using Ubuntu
-      - curl -sL https://deb.nodesource.com/setup_10.x | bash -
-      - sudo apt install -y nodejs
+      #- curl -sL https://deb.nodesource.com/setup_10.x | bash -
+      #- sudo apt install -y nodejs
       # install 
       - echo Installing yarn ...
       - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -33,8 +33,6 @@ phases:
     commands:
       - echo Entered the build phase ...
       - echo Build started on `date`
-      - echo Testing ...
-      - yarn test
       - echo Building ...
       - yarn build 
   post_build:
