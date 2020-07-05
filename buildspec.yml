@@ -25,6 +25,8 @@ phases:
     run-as: root
     commands:
       - echo Entered the build phase ...
+      - echo Build started on `date`
+      - npm run build
   post_build:
     run-as: root
     commands:
@@ -33,3 +35,4 @@ phases:
 artifacts:
   files:
     - "**/*"
+  base-directory: build
